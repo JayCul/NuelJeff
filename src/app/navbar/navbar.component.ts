@@ -1,6 +1,8 @@
 import { Component, OnInit, booleanAttribute } from '@angular/core';
 import { ThemeSwitcherComponent } from '../theme-switcher/theme-switcher.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Collapse, CollapseInterface } from 'flowbite';
+
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +11,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   constructor(public ThemeSwitcherComponent: ThemeSwitcherComponent, public router: Router, public route: ActivatedRoute){}
+
+  
+// set the target element that will be collapsed or expanded (eg. navbar menu)
+  targetEl: HTMLElement | any = document.getElementById('navbar-default');
   whiteLogo: string = "../../assets/images/Nuel-logo-white.png"
   darkLogo: string = "../../assets/images/NuelJeff_Logo.png";
-  
+
   sunLogo: string = "fa-regular fa-sun";
   moonLogo: string = "fa-regular fa-moon";
   icon: string = "";
   fileLocation: string = "" ;
   darkMode: boolean | any = false;
+
   toggleTheme(){
     this.ThemeSwitcherComponent.toggleTheme();
     this.toggleLogo();

@@ -10,7 +10,7 @@ import { Component, Injectable, OnInit } from '@angular/core';
   styleUrls: ['./theme-switcher.component.scss']
 })
 export class ThemeSwitcherComponent implements OnInit {
-  darkMode: boolean | any = false;
+  darkMode: boolean | any = true;
 
   toggleTheme(): void {
     this.darkMode = !this.darkMode;
