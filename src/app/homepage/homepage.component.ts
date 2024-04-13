@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-homepage',
@@ -8,7 +9,7 @@ import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent {
-  constructor(private builder: FormBuilder) {}
+  constructor(private builder: FormBuilder, private toastr: ToastrService) {}
 
   ContactForm: FormGroup  = this.builder.group({
     Name: new FormControl('', [Validators.required]),
@@ -80,9 +81,29 @@ export class HomepageComponent {
         
     //   })
 
-      let response = await emailjs.send("Jays Tech Hub","template_qbj72gl", this.mailDetails);
-      alert("Sent");
-      this.ContactForm.reset();
+    try {
+      let response = await emailjs.send("Jays Tech Hub", "template_qbj72gl", this.mailDetails);
+      
+      // Check if the response has a status indicating success (e.g., 200 or 2xx)
+      if (response.status === 200 || (response.status >= 200 && response.status < 300)) {
+        console.log("Email sent successfully!");
+        this.toastr.success('Success!', 'Email sent successfully!');
+        this.ContactForm.reset();
+        // Handle success
+      } else {
+        console.error("Email sending failed. Status:", response.status);
+        this.toastr.error('Failed!', 'Email sending failed...', {
+          timeOut: 3000,
+        });
+        // Handle failure
+      }
+    } catch (error) {
+      console.error("An error occurred while sending the email:", error);
+      this.toastr.error('Failed!', 'Service Temporarily Unavailable...', {
+        timeOut: 3000,
+      });
+      // Handle error
+    }
       // .then(
       //   () => {
       //     console.log('SUCCESS!');
