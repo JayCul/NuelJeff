@@ -87,12 +87,12 @@ export class HomepageComponent {
       // Check if the response has a status indicating success (e.g., 200 or 2xx)
       if (response.status === 200 || (response.status >= 200 && response.status < 300)) {
         console.log("Email sent successfully!");
-        this.toastr.success('Success!', 'Email sent successfully!');
+        this.toastr.success('Email sent successfully!', 'Success!' );
         this.ContactForm.reset();
         // Handle success
       } else {
         console.error("Email sending failed. Status:", response.status);
-        this.toastr.error('Failed!', 'Email sending failed...', {
+        this.toastr.error( 'Email sending failed...', 'Failed!', {
           timeOut: 3000,
         });
         // Handle failure
@@ -104,13 +104,17 @@ export class HomepageComponent {
       });
       // Handle error
     }
-      // .then(
+    // .then(
       //   () => {
       //     console.log('SUCCESS!');
       //   },
       //   (error) => {
-      //     console.log('FAILED...', (error as EmailJSResponseStatus).text);
-      //   },
-      // );
-    }
+        //     console.log('FAILED...', (error as EmailJSResponseStatus).text);
+        //   },
+        // );
+      }
+      
+      downloading(){
+        this.toastr.success('Downloading File...', 'Connected!' );
+      }
 }
