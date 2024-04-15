@@ -14,10 +14,9 @@ export class NavbarComponent implements OnInit {
 
   
 // set the target element that will be collapsed or expanded (eg. navbar menu)
-  targetEl: HTMLElement | any = document.getElementById('navbar-default');
   whiteLogo: string = "../../assets/images/Nuel-logo-white.png"
   darkLogo: string = "../../assets/images/NuelJeff_Logo.png";
-
+  home:boolean = true;
   sunLogo: string = "fa-regular fa-sun";
   moonLogo: string = "fa-regular fa-moon";
   icon: string = "";
@@ -30,8 +29,14 @@ export class NavbarComponent implements OnInit {
   }
 
   routeToGallery(): void {
-    console.log("routeToGallery")
-    this.router.navigate(['/gallery'])
+    this.router.navigate(['/gallery']);
+    this.home = false;
+  }
+  
+  routeToHome(): void {
+    this.router.navigate(['/']);
+    this.home = true;
+
   }
 
   toggleLogo(){
@@ -42,12 +47,10 @@ export class NavbarComponent implements OnInit {
     if (this.darkMode == "false"){
       this.fileLocation = this.darkLogo;
       this.icon = this.moonLogo;
-      console.log("filelocation, ", this.icon)
       
     } else if (this.darkMode == "true"){
       this.icon = this.sunLogo;
       this.fileLocation = this.whiteLogo;
-      console.log("filelocation, ", this.icon)
     }
   }
 
