@@ -19,13 +19,23 @@ export class NavbarComponent implements OnInit {
   home:boolean = true;
   sunLogo: string = "fa-regular fa-sun";
   moonLogo: string = "fa-regular fa-moon";
-  icon: string = "";
+  themeIcon: string = "";
+  menuIcon: string = "fa-solid fa-bars";
   fileLocation: string = "" ;
   darkMode: boolean | any = false;
 
   toggleTheme(){
     this.ThemeSwitcherComponent.toggleTheme();
     this.toggleLogo();
+  }
+
+  toggleMenu(){
+    if (this.menuIcon === "fa-solid fa-bars"){
+      this.menuIcon = "fa-solid fa-xmark";
+    } else if (this.menuIcon === "fa-solid fa-xmark"){
+      this.menuIcon = "fa-solid fa-bars";
+
+    }
   }
 
   routeToGallery(): void {
@@ -46,10 +56,10 @@ export class NavbarComponent implements OnInit {
 
     if (this.darkMode == "false"){
       this.fileLocation = this.darkLogo;
-      this.icon = this.moonLogo;
+      this.themeIcon = this.moonLogo;
       
     } else if (this.darkMode == "true"){
-      this.icon = this.sunLogo;
+      this.themeIcon = this.sunLogo;
       this.fileLocation = this.whiteLogo;
     }
   }
